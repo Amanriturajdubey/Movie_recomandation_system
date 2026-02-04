@@ -4,9 +4,7 @@ import pickle
 import pandas as pd
 import requests
 
-# ---------------------------
 # Fetch poster and movie details from TMDB
-# ---------------------------
 TMDB_API_KEY = '0a26ac8256993454182e6bb7393b887c'
 
 def fetch_movie_data(movie_name):
@@ -26,15 +24,13 @@ def fetch_movie_data(movie_name):
         pass
     return "https://via.placeholder.com/500x750?text=No+Image", 'N/A', 'N/A'
 
-# ---------------------------
+
 # Load ML data
-# ---------------------------
 movies = pickle.load(open('movie.pkl', 'rb'))
 similarity = pickle.load(open('similarity.pkl', 'rb'))
 
-# ---------------------------
+
 # Recommendation function
-# ---------------------------
 def recommend(movie_name):
     matched_movies = movies[movies['title'].str.lower() == movie_name.lower()]
     if len(matched_movies) == 0:
@@ -52,21 +48,18 @@ def recommend(movie_name):
         recommended.append({"title": title, "poster": poster, "year": year, "rating": rating})
     return recommended
 
-# ---------------------------
+
 # Streamlit UI
-# ---------------------------
 st.set_page_config(page_title="🎬 Cinematic Movie Recommender", layout="wide", page_icon="🎬")
 
 st.markdown("""
 <style>
-/* ------------------ Overall background ------------------ */
 .stApp {
     background: linear-gradient(135deg, #0B0C10, #1F1F1F);
     color: #fff;
     font-family: 'Arial', sans-serif;
 }
 
-/* ------------------ Title animations ------------------ */
 @keyframes fadeInUp {
     0% { opacity: 0; transform: translateY(20px); }
     100% { opacity: 1; transform: translateY(0); }
@@ -79,7 +72,6 @@ st.markdown("""
     color: #FFD700;
 }
 
-/* ------------------ Movie card ------------------ */
 .movie-card {
     border-radius: 15px;
     overflow: hidden;
@@ -107,7 +99,6 @@ st.markdown("""
     animation: fadeInUp 1.4s ease forwards;
 }
 
-/* ------------------ Button ------------------ */
 @keyframes bounce {
     0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
     40% {transform: translateY(-8px);}
@@ -128,13 +119,11 @@ st.markdown("""
     animation: bounce 0.5s;
 }
 
-/* ------------------ Searchbox styling ------------------ */
 .css-1kyxreq { width: 100% !important; }
 .stSelectbox > div > div > div > span {
     font-size: 18px !important;
 }
 
-/* ------------------ Footer ------------------ */
 footer { visibility: hidden; }
 .custom-footer {
     text-align: center;
@@ -145,18 +134,15 @@ footer { visibility: hidden; }
 </style>
 """, unsafe_allow_html=True)
 
-# ------------------ Page Title ------------------
 st.markdown("<h1 class='animated-title'>🎬 Cinematic Movie Recommender</h1>", unsafe_allow_html=True)
 st.markdown("<h3 class='animated-subtitle'>Discover your next favorite movie with style!</h3>", unsafe_allow_html=True)
 
-# ------------------ Searchbar ------------------
 selected_movie_name = st.selectbox(
     'Search for a movie...',
     movies['title'].values,
     index=0
 )
 
-# ------------------ Recommend Button ------------------
 if st.button('🎯 Recommend'):
     with st.spinner('Fetching top picks... 🍿'):
         recommendations = recommend(selected_movie_name)
@@ -178,5 +164,4 @@ if st.button('🎯 Recommend'):
     else:
         st.warning("No recommendations found!")
 
-# ------------------ Footer ------------------
-st.markdown("<div class='custom-footer'>Made with ❤️ | Powered by TMDB API & Streamlit</div>", unsafe_allow_html=True)
+st.markdown("<div class='custom-footer'>Made with ❤️ </div>", unsafe_allow_html=True)
