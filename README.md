@@ -1,4 +1,4 @@
- Movie Recommendation System using Machine Learning
+ Movie Recommendation System using Machine Learning..
 
 ##  Project Overview
 This project is a Movie Recommendation System built using Python and Machine Learning.  
@@ -56,11 +56,10 @@ Raw data was cleaned and transformed to make it suitable for machine learning.
 5. Model Building
 6. Movie Recommendation
 
----
+
 
 ##  How to Run the Project
-```bash
-git clone <your-github-repo-link>
-cd movie-recommendation-system
+git clone https://github.com/Amanriturajdubey/Movie_recomandation_system.git
+cd Movie_recomandation_system
 pip install -r requirements.txt
-python app.py
+streamlit run Streamlit_web_Design.py
